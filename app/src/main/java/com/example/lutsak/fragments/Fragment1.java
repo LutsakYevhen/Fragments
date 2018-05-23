@@ -1,7 +1,7 @@
 package com.example.lutsak.fragments;
 
-import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 
 public class Fragment1 extends Fragment {
 
-    final String LOG_TAG = "Fragment";
+    private static final String LOG_TAG = "Fragment";
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
         Log.d(LOG_TAG, "Fragment1 onAttach");
     }
 
