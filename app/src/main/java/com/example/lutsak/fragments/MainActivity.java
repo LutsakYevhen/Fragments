@@ -10,6 +10,8 @@ import android.widget.Button;
 public class MainActivity extends Activity implements View.OnClickListener{
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private static final String FRAGMENT1_TAG = "fragment1";
+    private static final String FRAGMENT2_TAG = "fragment2";
 
     private Button mBlueButton;
     private Button mRedButton;
@@ -65,13 +67,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 if (fragment2 == null) {
                     fragment2 = new Fragment2();
                 }
-                fragmentTransaction.replace(R.id.frame_layout, fragment2, "fragment2");
+                fragmentTransaction.replace(R.id.frame_layout, fragment2, FRAGMENT2_TAG);
                 break;
             case R.id.red_button:
                 if (fragment1 == null) {
                     fragment1 = new Fragment1();
                 }
-                fragmentTransaction.replace(R.id.frame_layout, fragment1, "fragment1");
+                fragmentTransaction.replace(R.id.frame_layout, fragment1, FRAGMENT1_TAG);
                 break;
         }
         fragmentTransaction.commit();
