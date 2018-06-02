@@ -1,13 +1,81 @@
 package com.example.lutsak.fragments;
-
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity implements View.OnClickListener{
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private static final String FRAGMENT1_TAG = "fragment1";
+    private static final String FRAGMENT2_TAG = "fragment2";
+
+    private Button mBlueButton;
+    private Button mRedButton;
+
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d(LOG_TAG, ">> MainActivity onCreate");
+
+        mBlueButton = findViewById(R.id.blue_button);
+        mRedButton = findViewById(R.id.red_button);
+
+        mBlueButton.setOnClickListener(this);
+        mRedButton.setOnClickListener(this);
+
+        Log.d(LOG_TAG, "<< MainActivity onCreate");
+    }
+
+    protected void onStart() {
+        super.onStart();
+        Log.d(LOG_TAG, "MainActivity onStart");
+    }
+
+    protected void onResume() {
+        super.onResume();
+        Log.d(LOG_TAG, "MainActivity onResume");
+    }
+
+    protected void onPause() {
+        super.onPause();
+        Log.d(LOG_TAG, "MainActivity onPause");
+    }
+
+    protected void onStop() {
+        super.onStop();
+        Log.d(LOG_TAG, "MainActivity onStop");
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(LOG_TAG, "MainActivity onDestroy");
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        Fragment fragment1 = getFragmentManager().findFragmentByTag("fragment1");
+        Fragment fragment2 = getFragmentManager().findFragmentByTag("fragment2");
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+        switch (v.getId()){
+            case R.id.blue_button:
+                if (fragment2 == null) {
+                    fragment2 = new Fragment2();
+                }
+                fragmentTransaction.replace(R.id.frame_layout, fragment2, FRAGMENT2_TAG);
+                break;
+            case R.id.red_button:
+                if (fragment1 == null) {
+                    fragment1 = new Fragment1();
+                }
+                fragmentTransaction.replace(R.id.frame_layout, fragment1, FRAGMENT1_TAG);
+                break;
+        }
+        fragmentTransaction.commit();
     }
 }
